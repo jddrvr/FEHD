@@ -1,3 +1,6 @@
+c     Jon Drover, June 18 ,2018
+c     The main function to determine the FEHD of a multivariate time series. 
+      
       SUBROUTINE FEHD(nComps,M,N,L,HD,Lout)
       
       use ARmatrices
