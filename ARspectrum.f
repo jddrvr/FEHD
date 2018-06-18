@@ -1,3 +1,5 @@
+c     Jon Drover, June 18,2018
+c     Computes the spectrum from the lag matrices of an AR model
       subroutine ARspectrum()
 
       use ARmatrices,only:A,spec,Tf,numFreqs,numLags,comps,
