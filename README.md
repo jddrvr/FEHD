@@ -82,15 +82,26 @@ Demo driver - FEHDtest.m
 Function files:
 
 FEHD.m
+
+
 AR_calc_spectrum.m - Computes the spectrum from an AR model
+
 convertA.m - Gadget to convert the form of the lag matrices
+
 eegplot.m - A plotting function (Repucci, et al. 2001)
+
 grangerBlockMin.m - Single angle minimization
+
 grangerInt.m - Computes the integral of Granger causalities
+
 minGrangerInt.m - finds the minimum
+
 mkAR.m - Computes an AR model given the data and lags
+
 pca.m - Computes the Principal components
+
 PGC.m - Computes the grid of pairwise Granger Causalities
+
 USE:
 
 At the MATLAB prompt, 
