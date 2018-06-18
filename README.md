@@ -15,8 +15,7 @@ ARspectrum.f - Computes the spectra using the AR model
 makeAR.f - Computes AR model from data
 pca2.f - Computes the principal components
 FEHD.f - The FEHD algorithm
-invert.f - inverts a matrix, used to solve the least squares problem that
-    forms the AR model
+invert.f - inverts a matrix, used to solve the least squares problem that forms the AR model
 steepestDescent.f - The minimization routine
 compGradient.f - Computes the gradient
 grangerIntSINGLE.f - Single thread computation of integral of GC values over
