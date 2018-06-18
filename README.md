@@ -1,16 +1,16 @@
 # FEHD
 Frequency Extracted Hierarchical Decomposition
 
-This folder contains two implementations of FEHD. One is in FORTRAN, and this is for large systems (in terms of components). The other is in MATLAB. The MATLAB version is mainly for exposition. For analysis on data with a lot of components (eg. the number of principal components one chooses to represent their data) then we would highly recommend using the FORTRAN version 
+This folder contains two implementations of FEHD. One is in FORTRAN, and this is for large systems 
+(in terms of components). The other is in MATLAB. The MATLAB version is mainly for exposition. For 
+analysis on data with a lot of components (eg. the number of principal components one chooses to 
+represent their data) then we would highly recommend using the FORTRAN version 
 
-
--------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 The FORTRAN version of FEHD.
 
 We use gfortran from the GNU compiler collection to compile, as this compiler is freely available for any system. 
-
 Files:
-
 exampleDRIVER.f - The file the user will define parameters and data files
 
 ARspectrum.f - Computes the spectra using the AR model
