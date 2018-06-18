@@ -10,16 +10,26 @@ The FORTRAN version of FEHD.
 We use gfortran from the GNU compiler collection to compile, as this compiler is freely available for any system. 
 
 Files:
+
 exampleDRIVER.f - The file the user will define parameters and data files
+
 ARspectrum.f - Computes the spectra using the AR model
+
 makeAR.f - Computes AR model from data
+
 pca2.f - Computes the principal components
+
 FEHD.f - The FEHD algorithm
+
 invert.f - inverts a matrix, used to solve the least squares problem that forms the AR model
+
 steepestDescent.f - The minimization routine
+
 compGradient.f - Computes the gradient
+
 grangerIntSINGLE.f - Single thread computation of integral of GC values over
     frequency
+
 calcDet.f - Quickly computes a determinant.
 
 The code also depends on the LAPACK and BLAS libraries. 
