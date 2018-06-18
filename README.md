@@ -10,7 +10,9 @@ represent their data) then we would highly recommend using the FORTRAN version
 The FORTRAN version of FEHD.
 
 We use gfortran from the GNU compiler collection to compile, as this compiler is freely available for any system. 
+
 Files:
+
 exampleDRIVER.f - The file the user will define parameters and data files
 
 ARspectrum.f - Computes the spectra using the AR model
@@ -58,3 +60,38 @@ the file into epochs.
 ----------------------------------------------
 The MATLAB implementation
 
+Code to supplement:
+
+A method for decomposing multivariate time series into a causal
+hierarchy within specific frequency bands.
+
+Example driver for the FEHD method, written in MATLAB.
+This version uses a similar approach as Repucci et al, 2001
+
+There is also a FORTRAN version which uses steepest descent,
+utilizing the multiple threads available on most computers.
+For large numbers of components (say, more than 5) the FORTRAN
+version is recommended.
+
+Included:
+
+Data (corresponding to figures 3,4,5,6,8)- X.mat
+
+Demo driver - FEHDtest.m
+
+Function files:
+
+FEHD.m
+AR_calc_spectrum.m - Computes the spectrum from an AR model
+convertA.m - Gadget to convert the form of the lag matrices
+eegplot.m - A plotting function (Repucci, et al. 2001)
+grangerBlockMin.m - Single angle minimization
+grangerInt.m - Computes the integral of Granger causalities
+minGrangerInt.m - finds the minimum
+mkAR.m - Computes an AR model given the data and lags
+pca.m - Computes the Principal components
+PGC.m - Computes the grid of pairwise Granger Causalities
+USE:
+
+At the MATLAB prompt, 
+> FEHDtest
