@@ -1,0 +1,198 @@
+#!/bin/bash
+
+for f in *
+do
+    if [ -d $f ]
+    then
+	currentString=$f
+	subjectID=$f
+	#what is here? - Need to go through and insist on visitn for folder structure
+	for visitString in $currentString/*
+	do
+	    # Check to see if this is a valid visit directory
+	    visitDirectory=$(echo $visitString | cut -d'/' -f 2)
+	    if [ $(echo $visitDirectory | cut -c1-5) = "visit" ]
+	    then
+		visitID="v"$(echo $visitDirectory | cut -c6-)
+
+		# Sixteen files we are looking for
+		specHead_4_8=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_4_8_specAndHead.jpg"
+		specHead_8_12=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_8_12_specAndHead.jpg"
+		specHead_12_20=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_12_20_specAndHead.jpg"
+		specHead_20_40=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_20_40_specAndHead.jpg"
+
+		PGC_4_8=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_4_8_PGC.jpg"
+		PGC_8_12=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_8_12_PGC.jpg"
+		PGC_12_20=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_12_20_PGC.jpg"
+		PGC_20_40=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_20_40_PGC.jpg"
+
+		samples_4_8=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_4_8_samples.jpg"
+		samples_8_12=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_8_12_samples.jpg"
+		samples_12_20=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_12_20_samples.jpg"
+		samples_20_40=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_20_40_samples.jpg"
+
+		GCints_4_8=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_4_8_GCintegrals.jpg"
+		GCints_8_12=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_8_12_GCintegrals.jpg"
+		GCints_12_20=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_12_20_GCintegrals.jpg"
+		GCints_20_40=$currentString"/"$visitDirectory"/"$subjectID"_"$visitID"_20_40_GCintegrals.jpg"
+
+		echo "Subject: "$subjectID
+		echo "Visit: "$visitID
+		
+		if [ -f $specHead_4_8 -a -f $PGC_4_8 -a -f $samples_4_8 -a -f $GCints_4_8 ]
+		then
+		    echo "All files present for 4-8 Hz"
+		else
+		    echo "Could not locate all of the 4-8 Hz figure files"
+		    continue
+		fi
+		
+		if [ -f $specHead_8_12 -a -f $PGC_8_12 -a -f $samples_8_12 -a -f $GCints_8_12 ]
+		then
+		    echo "All files present for 8-12 Hz"
+		else
+		    echo "Could not locate all of the 8-12 Hz figure files"
+		    continue
+		fi
+
+		if [ -f $specHead_12_20 -a -f $PGC_12_20 -a -f $samples_12_20 -a -f $GCints_12_20 ]
+		then
+		    echo "All files present for 12-20 Hz"
+		else
+		    echo "Could not locate all of the 12-20 Hz figure files"
+		    continue
+		fi
+		
+		if [ -f $specHead_20_40 -a -f $PGC_20_40 -a -f $samples_20_40 -a -f $GCints_20_40 ]
+		then
+		    echo "All files present for 20-40 Hz"
+		else
+		    echo "Could not locate all of the 20-40 Hz figure files"
+		    continue
+		fi
+		
+		echo "All necessary files are present, putting together the slide"
+
+		slideName=$subjectID"_"$visitID".tex"
+
+		# graphics path for latex
+		graphicsPath=$graphicsPath"{"$subjectID"/visit"$(echo $visitID | cut -c 2-)"/}"
+		
+		cat << EOF > $slideName
+\begin{frame}	
+\frametitle{$subjectID, $visitID}
+  \begin{minipage}{0.49\linewidth}
+    \begin{center}
+      4-8 Hz
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.49\linewidth}
+    \begin{center}
+      8-12 Hz
+    \end{center}
+  \end{minipage}
+  
+  \begin{minipage}{0.23\textwidth}
+    \vspace{-0.25in}
+    \begin{center}    
+      \includegraphics[width=39mm,natwidth=3000,natheight=3000]{$specHead_4_8}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}[t]{0.23\textwidth}
+    \begin{center}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$PGC_4_8}
+      
+      \vspace{-0.2in}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$samples_4_8}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.23\linewidth}
+    \begin{center}
+      \vspace{-0.25in}
+      \includegraphics[width=39mm,natwidth=3000,natheight=3000]{$specHead_8_12}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}[t]{0.23\textwidth}
+    \begin{center}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$PGC_8_12}
+      
+      \vspace{-0.2in}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$samples_8_12}
+    \end{center}
+  \end{minipage}
+
+  \begin{minipage}{0.48\linewidth}
+    \begin{center}
+      12-20 Hz
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.48\linewidth}
+    \begin{center}
+      20-40 Hz
+    \end{center}
+  \end{minipage}
+
+  \begin{minipage}{0.23\textwidth}
+    \vspace{-0.25in}
+    \begin{center}    
+      \includegraphics[width=39mm,natwidth=3000,natheight=3000]{$specHead_12_20}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}[t]{0.23\textwidth}
+    \begin{center}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$PGC_12_20}
+      
+      \vspace{-0.2in}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$samples_12_20}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.23\linewidth}
+    \begin{center}
+      \vspace{-0.25in}
+      \includegraphics[width=39mm,natwidth=3000,natheight=3000]{$specHead_20_40}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}[t]{0.23\textwidth}
+    \begin{center}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$PGC_20_40}
+      
+      \vspace{-0.2in}
+      \includegraphics[width=\linewidth,natwidth=903,natheight=677]{$samples_20_40}
+    \end{center}
+  \end{minipage}
+
+\end{frame} 
+EOF
+
+	    fi
+	    
+	done
+	
+    fi
+done
+
+# Generate the tex file header
+
+graphicsPath="{"$graphicsPath"}"
+
+cat << EOF > texHeader.tex
+\documentclass[]{beamer}
+\usepackage{graphicx}
+\graphicspath$graphicsPath
+
+\begin{document}
+  
+EOF
+
+cat texHeader.tex *_v*.tex > slides.tex
+echo "\end{document}" >> slides.tex
+
+latex slides.tex > /dev/null 2>/dev/null
+dvipdfm slides.dvi > /dev/null 2>/dev/null
+
+mv slides.pdf recordBook.pdf
+
+# clean up
+rm slides.*
+rm *_v*.tex
+rm texHeader.tex
