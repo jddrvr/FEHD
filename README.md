@@ -1,4 +1,7 @@
 # FEHD
+
+PLEASE USE THE CODE IN MY FEHD_cuda REPOSITORY OR MY FEHD_omp REPOSITORY IF YOU WANT TO USE FEHD.
+
 Frequency Extracted Hierarchical Decomposition
 
 This folder contains two implementations of FEHD. One is in FORTRAN, and this is for large systems 
